@@ -1,0 +1,4 @@
+# NLP correction module dependencies
+python-Levenshtein>=0.25   # edit-distance based correction
+regex>=2024.4.16           # Unicode/Ethiopic-aware text processing
+numpy>=1.26

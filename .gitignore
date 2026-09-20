@@ -1,0 +1,57 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+.env
+.mypy_cache/
+.pytest_cache/
+
+# ===== Node / React Native =====
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.expo/
+.expo-shared/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# ===== Machine learning artifacts =====
+# Trained model weights (large binary files should not be committed;
+# use a release, cloud storage, or Git LFS instead)
+ml/models/*
+!ml/models/.gitkeep
+*.pt
+*.pth
+*.onnx
+*.h5
+*.ckpt
+
+# ===== Datasets =====
+# Raw and processed data should not be committed to the repo.
+# Document how to obtain the Fidel dataset in ml/README.md instead.
+ml/data/*
+!ml/data/.gitkeep
+nlp_correction/data/*
+!nlp_correction/data/.gitkeep
+
+# ===== Jupyter =====
+.ipynb_checkpoints/
+
+# ===== OS / Editor =====
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ===== Build outputs =====
+dist/
+build/
+*.log

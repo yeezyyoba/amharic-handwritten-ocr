@@ -1,0 +1,12 @@
+# Recognition model dependencies
+torch>=2.2
+torchvision>=0.17
+transformers>=4.40      # for the TrOCR comparison model
+datasets>=2.19          # Hugging Face datasets (Fidel dataset access)
+numpy>=1.26
+pillow>=10.3
+opencv-python>=4.9
+jiwer>=3.0              # CER/WER computation
+tqdm>=4.66
+matplotlib>=3.8         # error analysis plots
+scikit-learn>=1.4
