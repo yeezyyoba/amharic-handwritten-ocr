@@ -46,7 +46,7 @@ a remote backend service:
 | Component | Responsibility | Owner |
 |---|---|---|
 | `ml/` | Dataset prep, model training, evaluation (CER/WER), error analysis | Hallelujah |
-| `nlp_correction/` | Post-processing correction of recognition output | Eyob |
+| `ml/` | Handwritten text recognition and NLP-based post-processing correction | Eyob |
 | `backend/` | Hosts recognition + correction pipeline as a remote API | Shared |
 | `mobile/` | Capture/upload UI, editable text interface, export | Leawi |
 

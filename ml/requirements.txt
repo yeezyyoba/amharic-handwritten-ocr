@@ -10,3 +10,7 @@ jiwer>=3.0              # CER/WER computation
 tqdm>=4.66
 matplotlib>=3.8         # error analysis plots
 scikit-learn>=1.4
+
+# NLP correction dependencies
+python-Levenshtein>=0.25
+regex>=2024.4.16

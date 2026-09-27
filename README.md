@@ -28,8 +28,7 @@ Advisor: Mr. Surafiel Habib
 amharic-ocr-app/
 ├── docs/              Proposal, architecture notes
 ├── ml/                Recognition model (CRNN+CTC, TrOCR comparison)
-├── nlp_correction/    Post-processing correction module
-├── backend/           FastAPI service that hosts the recognition + correction pipeline
+├── ml/                Machine learning and NLP correction├── backend/           FastAPI service that hosts the recognition + correction pipeline
 └── mobile/            React Native mobile application
 ```
 
@@ -53,8 +52,7 @@ Each component is developed and run independently during this stage of the
 project. See:
 
 - [`ml/README.md`](ml/README.md) — recognition model setup
-- [`nlp_correction/README.md`](nlp_correction/README.md) — correction module setup
-- [`backend/README.md`](backend/README.md) — backend service setup
+- [`ml/README.md`](ml/README.md) — machine learning and NLP correction- [`backend/README.md`](backend/README.md) — backend service setup
 - [`mobile/README.md`](mobile/README.md) — mobile app setup
 
 ## Status

@@ -37,11 +37,10 @@ ml/models/*
 # ===== Datasets =====
 # Raw and processed data should not be committed to the repo.
 # Document how to obtain the Fidel dataset in ml/README.md instead.
-ml/data/*
-!ml/data/.gitkeep
-nlp_correction/data/*
-!nlp_correction/data/.gitkeep
 
+ml/data/*
+!ml/data/processed/
+!ml/data/processed/.gitkeep
 # ===== Jupyter =====
 .ipynb_checkpoints/
 

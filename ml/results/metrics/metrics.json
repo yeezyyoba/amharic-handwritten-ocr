@@ -1,0 +1,8 @@
+{
+  "current_epoch": 17,
+  "best_epoch": 13,
+  "best_cer": 0.16465550602343032,
+  "current_cer": 0.17053570082372985,
+  "current_wer": 0.41307477117792446,
+  "current_exact_accuracy": 0.010150722854506305
+}
