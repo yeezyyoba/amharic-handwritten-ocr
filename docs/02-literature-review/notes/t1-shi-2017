@@ -1,0 +1,59 @@
+# An End-to-End Trainable Neural Network for Image-Based Sequence Recognition and Its Application to Scene Text Recognition (Shi et al., 2017)
+
+**Citation (IEEE):** B. Shi, X. Bai, and C. Yao, "An end-to-end trainable neural network for image-based sequence recognition and its application to scene text recognition," *IEEE Trans. Pattern Anal. Mach. Intell.*, vol. 39, no. 11, pp. 2298–2304, Nov. 2017.
+**Link / DOI:** https://arxiv.org/abs/1507.05717 
+## Problem
+
+Image-based sequence recognition (scene text, handwriting, music scores) has to produce a variable-length label sequence from an image. Earlier systems either detected and classified each character separately, treated every word as one class from a fixed dictionary (90,000 classes), or fed hand-made features into an RNN so that the system could not be trained end to end. The paper asks for one model that is trained end to end, needs no character segmentation or fixed lexicon, and is small.
+
+## Method
+
+CRNN has three parts, trained with one loss. 
+
+1. Convolutional layers (based on VGG) turn a grayscale image scaled to height 32 into feature maps.
+2. A map-to-sequence layer cuts the feature maps into columns, each one pixel wide, giving a feature sequence from left to right.
+3. Two bidirectional LSTM layers (256 hidden units each) predict a label distribution for every frame.
+4. Transcription uses CTC (the formulation of Graves et al., 2006). Lexicon-free mode takes the best path. Lexicon-based mode searches a lexicon with a BK-tree (maximum edit distance 3).
+
+Details: batch normalization after the 5th and 6th convolution layers; 1 × 2 pooling windows in the 3rd and 4th max-pooling layers, so a 100 × 32 image gives 25 frames and narrow characters such as "i" and "l" get rectangular receptive fields. Training uses ADADELTA. 
+
+## Data
+
+Training: 8 million synthetic word images (Jaderberg et al.), with no fine-tuning on any benchmark. Training images are scaled to 100 × 32. Test images are scaled to height 32 with width proportional (at least 100). Benchmarks: IIIT5k (3,000 images), SVT (647), IC03 (860), IC13 (1,015). Music experiment: 2,650 collected score images augmented to 265,000. 
+
+## Evaluation
+
+Word recognition accuracy on the four scene-text benchmarks, with per-image lexicons of 50 words, 1k, 50k or the full lexicon, and with no lexicon. For music, fragment accuracy and average edit distance against two commercial systems. Model size is counted in parameters. 
+## Key results (arXiv v1)
+
+| Setting | IIIT5k | SVT | IC03 | IC13 |
+|---|---|---|---|---|
+| Lexicon-free (CRNN) | 78.2 | 80.8 | 89.4 | 86.7 |
+| 50-word lexicon (CRNN) | 97.6 | 96.4 | 98.7 | - |
+
+- Parameters: 8.3 million, 33 MB. The dictionary-based model of Jaderberg et al. has 490M and their unconstrained model 304M. 
+- Lexicon-free comparison: the dictionary-constrained Jaderberg et al. model reaches 93.1 on IC03 and 90.8 on IC13 (starred in the paper because its output is limited to a 90k dictionary). Their unconstrained model reaches 89.6 on IC03 and 81.8 on IC13. 
+- Music scores: fragment accuracy 74.6% (clean), 81.5% (synthesized), 84.0% (real-world), against 55.0%, 28.0% and 43.5% for the better of the two commercial engines (Capella Scan, PhotoScore) on each set. [Table 4]
+- Training took about 50 hours on one Tesla K40, and recognition about 0.16 s per image without a lexicon. [Section 3.2]
+
+## Strengths
+
+- Trains from images and word labels only. No character annotation, no binarization, no segmentation.
+- Handles variable-length sequences and is not tied to a dictionary.
+- Small enough to deploy.
+- Trained purely on synthetic data and still competitive on real benchmarks.
+
+## Weaknesses
+
+- Latin scene-text words, not handwriting and not full lines. The only other domain tested is music pitch sequences.
+- Its best figures use lexicons. Without a lexicon it is behind other systems on IC03 and IC13.
+- The paper says CRNN could handle other scripts such as Chinese, but tests none.
+- Single runs, no variance reported.
+- Later papers report different CRNN numbers .
+
+## Relevance to our project
+
+- This is the architecture behind our primary model. `ml/src/model.py` has six convolution layers with batch normalization, a two-layer bidirectional LSTM with 256 hidden units, and a linear layer trained with CTC, the same recurrent setup as in the paper.
+- Differences: the paper keeps the aspect ratio (height 32, variable width at test time), while `ml/src/dataset.py` resizes every line to 512 × 64, so short and long lines are both rescaled to the same size. Our first run reached a best validation CER of 0.1647 (WER 0.411) on the writer-disjoint validation split. This is not a test result (see `ml/results/README.md`).
+- The 8.3M parameter size and 33 MB footprint are the reason CRNN is the primary model for a mobile app with a remote backend.
+- The paper gives no evidence on how CRNN behaves on a script with hundreds of characters such as Fidel.
