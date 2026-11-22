@@ -51,8 +51,5 @@ Source: Table 1. The paper reports all differences as significant (p < 0.01) exc
 
 ## Relevance to our project
 
-- Our CRNN (`ml/src/model.py`, trained with `nn.CTCLoss`) needs only a line image and its transcription. No character segmentation of Fidel lines is needed.
 - The U ≤ T condition applies to our setup. The first two pooling layers halve the width twice, so a 512-pixel-wide input gives 128 frames. A label can have at most 128 characters, and fewer if it contains repeated characters, since repeats need a blank between them. The longest labels in Fidel and AHL-D 29K have to be checked against this limit.
-- `ml/src/decode.py` uses greedy (best path) decoding, which is Eq. 4 in this paper. The 0.96 point gain from prefix search on TIMIT shows decoding matters little compared with the model itself, but it is a decoding option we have not tried.
 - Section 6 is the basis for the correction module: CTC does not model label dependencies explicitly, so errors that depend on context (similar Fidel characters, word boundaries) are not fixed by the recogniser itself.
-- Our CER follows the same idea as Eq. 1: edit distance divided by the number of reference characters.
