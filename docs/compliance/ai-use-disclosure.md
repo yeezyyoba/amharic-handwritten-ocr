@@ -35,6 +35,6 @@ We confirm that all AI-assisted text and code was reviewed, understood and
 tested by us, that all references were verified, and that no confidential or
 personal data was entered into public AI services.
 
-Signatures: ____________________ ____________________ ____________________ ____________________
+Signatures: ____Eyob Nebyou____ ____________________ ____________________ ____________________
 
-Date: ____________________
+Date: ____November 26, 2026_________
