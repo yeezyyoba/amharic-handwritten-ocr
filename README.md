@@ -19,7 +19,7 @@ CRNN+CTC and TrOCR on handwritten Amharic; see `docs/technical-report/`.
 | Eyob Nebyou | UGR/5588/16 | 1 | NLP correction module |
 | Hallelujah Ezra | UGR/4392/16 | 1 | Computer vision and recognition model |
 | Leawi Tadesse | UGR/4319/16 | 2 | Mobile application and integration |
-| Maryamawit Lemma | UGR/6995/16 | 2 | _To be confirmed_ |
+| Maryamawit Lemma | UGR/6995/16 | 2 | Quality assuring and app integration |
 
 Advisor: Mr. Surafiel Habib
 
